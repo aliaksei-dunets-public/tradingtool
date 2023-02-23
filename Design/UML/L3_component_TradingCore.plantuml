@@ -1,0 +1,35 @@
+@startuml Component_TradingCore
+
+node TradingRobot
+node TradingAlert
+node TradingAnalysis
+
+node TradingCore {
+  component CandleBar
+  component Timeframe
+  component Indicator
+  component Strategy
+  component Asset
+  component Handler
+  component Configuration
+}
+
+node investpy
+node Exchange_API {
+  node currency.com
+}
+
+database MongoDB
+database Airtable
+
+Handler --> Exchange_API
+Handler --> investpy
+
+TradingCore --> MongoDB
+Configuration --> Airtable
+
+TradingRobot ..> TradingCore
+TradingAlert ..> TradingCore
+TradingAnalysis ..> TradingCore
+
+@enduml

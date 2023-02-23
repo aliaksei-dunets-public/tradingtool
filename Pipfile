@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+datetime = "*"
+requests = "*"
+pandas-ta = "*"
+aiogram = "*"
+apscheduler = "==3.9.1"
+numpy = "*"
+python-dotenv = "*"
+openpyxl = "*"
+
+[dev-packages]
+ipykernel = "*"
+autopep8 = "*"
+black = "*"
+yapf = "*"
+
+[requires]
+python_version = "3.11"
+
+[pipenv]
+allow_prereleases = true

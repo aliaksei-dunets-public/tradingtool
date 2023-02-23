@@ -1,0 +1,28 @@
+@startuml Context
+
+actor User
+
+agent BrowserAndMobile
+agent Telegram
+agent Yandex_Alice
+
+component TradingTool
+
+node investpy
+node Exchange_API
+
+database NoSQLDataStore
+
+User --> Telegram
+User --> Yandex_Alice
+User --> BrowserAndMobile
+
+Telegram --> TradingTool
+Yandex_Alice --> TradingTool
+BrowserAndMobile --> TradingTool
+
+TradingTool --> Exchange_API
+TradingTool --> investpy
+TradingTool --> NoSQLDataStore
+
+@enduml

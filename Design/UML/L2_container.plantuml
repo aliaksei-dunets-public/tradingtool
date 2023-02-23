@@ -1,0 +1,42 @@
+@startuml Container
+
+actor User
+
+agent BrowserAndMobile
+agent Telegram
+agent Yandex_Alice
+
+component TradingTool {
+  node TradingRobot
+  node TradingAlert
+  node TradingAnalysis
+  node TradingCore
+}
+
+node investpy
+node Exchange_API {
+  node currency.com
+}
+
+database MongoDB
+database Airtable
+
+User --> Telegram
+User --> Yandex_Alice
+User --> BrowserAndMobile
+
+BrowserAndMobile --> TradingTool
+Telegram --> TradingTool
+Yandex_Alice --> TradingTool
+
+TradingCore --> Exchange_API
+TradingCore --> investpy
+
+TradingCore --> MongoDB
+TradingCore --> Airtable
+
+TradingRobot ..> TradingCore
+TradingAlert ..> TradingCore
+TradingAnalysis ..> TradingCore
+
+@enduml

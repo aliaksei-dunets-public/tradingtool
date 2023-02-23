@@ -1,0 +1,81 @@
+@startuml Class_TradingCore
+
+class Asset {
+  -__symbol : str
+  -__name : str
+
+  -__ticker : Ticker
+
+  +getSymbol() : str
+  +getName() : str
+  +getHistoryDataFrame(period, interval) : DataFrame
+}
+
+class  Mediator  {
+  -__asset : Asset
+  -__handler : HandlerBase
+  -__config : Configuration
+
+  +getAsset() : Asset
+  +getHandler() : HandlerBase
+}
+
+class IndicatorBase {
+  #_mediator : Mediator
+  #_name : str
+
+  +getName() : str
+  +getIndicatorValuesDataFrame(period, interval) : DataFrame
+  +getDesicion() : str
+}
+
+class StrategyBase {
+  #_name : str
+  #_description : str
+  #_interval : str
+  #_mediator : Mediator
+
+  +getName() : str
+  +getDescription() : str
+}
+
+class Executor {
+  analyseStrategy()
+  analyseStrategies()
+  analyseSymbol()
+  analyseSymbols()
+}
+
+class HandlerBase 
+class Configuration
+
+class Order {
+  direction
+  openDateTime
+  openPrice
+  amount
+  fee
+  closeDateTime
+  closePrice
+  stopLoss
+  takeProfit
+  PL
+}
+
+class Simulation {
+  signal_df : DataFrame
+  balance : float
+  orderLists : list[Order]
+
+}
+
+Executor --> StrategyBase
+Executor --> Configuration
+StrategyBase --> IndicatorBase
+StrategyBase --* Mediator
+IndicatorBase --* Mediator
+Mediator --* Asset
+Mediator --* HandlerBase
+Mediator --* Configuration
+
+@enduml
